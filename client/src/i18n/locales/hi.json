@@ -781,7 +781,9 @@
     "attachUnsupported": "{name} समर्थित नहीं है। छवियाँ (PNG, JPEG, WebP, GIF) या टेक्स्ट फ़ाइलें (TXT, MD, CSV, JSON, LOG) संलग्न करें।",
     "attachFailed": "{name} को पढ़ा नहीं जा सका।",
     "noVisionBadge": "छवि नहीं",
-    "visionWarning": "{model} छवियाँ स्वीकार नहीं करता। कोई दृष्टि मॉडल या ऑटो चुनें।"
+    "visionWarning": "{model} छवियाँ स्वीकार नहीं करता। कोई दृष्टि मॉडल या ऑटो चुनें।",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "बातचीत",
@@ -1026,7 +1028,11 @@
       "dsh": "DeepSeek का हार्नेस, जो हर प्रदाता को एक बदली जा सकने वाली रूट के रूप में रखता है।",
       "mimo": "Xiaomi का टर्मिनल एजेंट, OpenCode का फ़ोर्क, जो हर OpenAI-संगत प्रदाता लेता है।",
       "cursor": "AI-पहले वाला एडिटर; Cursor के क्लाउड से होकर जाता है, इसलिए सार्वजनिक URL चाहिए।",
-      "generic": "OpenAI API बोलने वाला कोई और टूल, बेस URL और कुंजी से हाथ से सेट करें।"
+      "generic": "OpenAI API बोलने वाला कोई और टूल, बेस URL और कुंजी से हाथ से सेट करें।",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

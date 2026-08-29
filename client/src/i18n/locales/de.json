@@ -781,7 +781,9 @@
     "attachUnsupported": "{name} wird nicht unterstützt. Hängen Sie Bilder (PNG, JPEG, WebP, GIF) oder Textdateien (TXT, MD, CSV, JSON, LOG) an.",
     "attachFailed": "{name} konnte nicht gelesen werden.",
     "noVisionBadge": "Keine Bilder",
-    "visionWarning": "{model} akzeptiert keine Bilder. Wählen Sie ein Vision-Modell oder Auto."
+    "visionWarning": "{model} akzeptiert keine Bilder. Wählen Sie ein Vision-Modell oder Auto.",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "Unterhaltungen",
@@ -1026,7 +1028,11 @@
       "dsh": "DeepSeeks Harness, das jeden Anbieter als umschaltbare Route führt.",
       "mimo": "Xiaomis Terminal-Agent, ein OpenCode-Fork für jeden OpenAI-kompatiblen Anbieter.",
       "cursor": "Der KI-zentrierte Editor; er läuft über Cursors Cloud und braucht daher eine öffentliche URL.",
-      "generic": "Alles andere, was die OpenAI-API spricht — von Hand mit Basis-URL und Schlüssel eingerichtet."
+      "generic": "Alles andere, was die OpenAI-API spricht — von Hand mit Basis-URL und Schlüssel eingerichtet.",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

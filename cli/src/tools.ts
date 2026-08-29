@@ -601,6 +601,61 @@ function generic(ctx: GenerateContext): Generation {
   };
 }
 
+// Guide-only generators. None of these four read a plain config file we could
+// patch: Plandex manages custom models through its own interactive CLI, Cody
+// gates custom OpenAI-compatible chat models behind an Enterprise server
+// config, and Windsurf and PearAI keep model endpoints in their app settings.
+// The notes carry the three values any of them will ask for — base URL, key,
+// model — so the card is still copy-pasteable.
+
+function plandex(ctx: GenerateContext): Generation {
+  const model = primaryModel(ctx.models, ctx.requestedModelId);
+  return {
+    files: [],
+    notes: [
+      'Plandex manages custom models through its own CLI, so there is no config file to patch: run `plandex models custom` and register an OpenAI-compatible provider.',
+      `Base URL: ${v1Url(ctx.url)} — API key: ${ctx.apiKey || '<unified-key>'} — model: ${model.id}`,
+      'Select it per-plan afterwards with \\set-model in the REPL or `plandex set-model`.',
+    ],
+  };
+}
+
+function windsurf(ctx: GenerateContext): Generation {
+  const model = primaryModel(ctx.models, ctx.requestedModelId);
+  return {
+    files: [],
+    notes: [
+      "Windsurf routes its built-in Cascade models through Codeium's cloud; a custom endpoint is entered in the app, not a file.",
+      `Open Windsurf Settings → Models, add a custom OpenAI-compatible model with base URL ${v1Url(ctx.url)} and the unified key.`,
+      `Model: ${model.id}. Localhost is fine — Windsurf runs on the same machine as the gateway.`,
+    ],
+  };
+}
+
+function cody(ctx: GenerateContext): Generation {
+  const model = primaryModel(ctx.models, ctx.requestedModelId);
+  return {
+    files: [],
+    notes: [
+      'Cody only accepts custom OpenAI-compatible chat models through a Cody Enterprise server config, never through local extension settings.',
+      `On the server side, point the provider at ${v1Url(ctx.url)} with the unified key and model ${model.id}.`,
+      'Without Enterprise, the extension talks to Sourcegraph-hosted models and cannot be retargeted here.',
+    ],
+  };
+}
+
+function pearai(ctx: GenerateContext): Generation {
+  const model = primaryModel(ctx.models, ctx.requestedModelId);
+  return {
+    files: [],
+    notes: [
+      'PearAI is a VS Code fork whose model endpoints live in the app settings UI, not in a file the CLI can patch.',
+      `In PearAI Settings, add a custom OpenAI-compatible provider with base URL ${v1Url(ctx.url)} and the unified key.`,
+      `Model: ${model.id}.`,
+    ],
+  };
+}
+
 const metadata = [
   ['claude', 'Claude Code', 'code', 'file', 'Anthropic Messages', 'root', 'setup-claude', 'https://docs.anthropic.com/en/docs/claude-code', claude],
   ['codex', 'Codex CLI', 'code', 'file', 'OpenAI Responses', '/v1', 'setup-codex', 'https://developers.openai.com/codex', codex],
@@ -617,6 +672,10 @@ const metadata = [
   ['mimo', 'MiMo Code', 'code', 'file', 'OpenAI Chat', '/v1', 'setup-mimo', 'https://mimo.xiaomi.com/mimocode', mimo],
   ['cursor', 'Cursor', 'code', 'guide', 'OpenAI Chat', '/v1', 'setup-cursor', 'https://docs.cursor.com', cursor],
   ['generic', 'Generic OpenAI client', 'agent', 'guide', 'OpenAI Chat', '/v1', 'setup-generic', 'https://github.com/tashfeenahmed/freellmapi', generic],
+  ['plandex', 'Plandex', 'agent', 'guide', 'OpenAI Chat', '/v1', 'setup-plandex', 'https://github.com/plandex-ai/plandex', plandex],
+  ['windsurf', 'Windsurf', 'code', 'guide', 'OpenAI Chat', '/v1', 'setup-windsurf', 'https://codeium.com/windsurf', windsurf],
+  ['cody', 'Sourcegraph Cody', 'code', 'guide', 'OpenAI Chat', '/v1', 'setup-cody', 'https://sourcegraph.com/docs/cody', cody],
+  ['pearai', 'PearAI', 'code', 'guide', 'OpenAI Chat', '/v1', 'setup-pearai', 'https://trypear.ai', pearai],
 ] as const;
 
 export const tools: ToolDefinition[] = metadata.map(([

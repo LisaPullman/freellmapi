@@ -50,3 +50,103 @@
     --chart-4: oklch(0.709 0.159 293.5);
     --chart-5: oklch(0.711 0.035 256.8);
 }
+
+/* Brand-tinted skeleton shimmer ---------------------------------------------
+   Replaces the bare `animate-pulse bg-muted` on every [data-slot="skeleton"].
+   The base is a 6% wash of --brand so the placeholder wears the same warmth
+   as the focus ring; a 18% highlight stripe slides across every 2.4s. The
+   gradient uses background-position instead of opacity so it survives the
+   `prefers-reduced-motion` opt-out we apply below. */
+@keyframes foxai-shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+}
+
+[data-slot="skeleton"] {
+    background-color: oklch(0.633 0.185 39.6 / 6%);
+    background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        oklch(0.633 0.185 39.6 / 18%) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: foxai-shimmer 2.4s ease-in-out infinite;
+}
+
+:root.dark [data-slot="skeleton"] {
+    background-color: oklch(0.727 0.173 39 / 8%);
+    background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        oklch(0.727 0.173 39 / 16%) 50%,
+        transparent 100%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-slot="skeleton"] {
+        animation: none;
+    }
+}
+
+/* Brand-coloured range track fill ------------------------------------------
+   The native <input type="range"> paints the *thumb*, not the fill up to
+   the thumb. This gradient draws a brand bar from min to the current value,
+   then a neutral track to max. --p is set inline by the consumer as the
+   percentage of the current value within the range.
+
+   Cross-browser: --webkit-slider-runnable-track paints the same gradient;
+   --moz-range-track does the same on Firefox. The native thumb remains in
+   `accent-color: var(--brand)` for the click target. */
+input[type="range"].brand-track {
+    appearance: none;
+    background: transparent;
+    --p: 0%;
+}
+input[type="range"].brand-track::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 9999px;
+    background-image: linear-gradient(
+        to right,
+        var(--brand) 0%,
+        var(--brand) var(--p),
+        var(--input) var(--p),
+        var(--input) 100%
+    );
+}
+input[type="range"].brand-track::-moz-range-track {
+    height: 4px;
+    border-radius: 9999px;
+    background-image: linear-gradient(
+        to right,
+        var(--brand) 0%,
+        var(--brand) var(--p),
+        var(--input) var(--p),
+        var(--input) 100%
+    );
+}
+input[type="range"].brand-track::-moz-range-progress {
+    background: var(--brand);
+    height: 4px;
+    border-radius: 9999px;
+}
+input[type="range"].brand-track::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--brand);
+    border: 2px solid var(--brand-foreground);
+    margin-top: -5px;
+    cursor: pointer;
+}
+input[type="range"].brand-track::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--brand);
+    border: 2px solid var(--brand-foreground);
+    cursor: pointer;
+}

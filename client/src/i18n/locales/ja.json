@@ -781,7 +781,9 @@
     "attachUnsupported": "{name} はサポートされていません。画像 (PNG、JPEG、WebP、GIF) またはテキスト ファイル (TXT、MD、CSV、JSON、LOG) を添付してください。",
     "attachFailed": "{name} を読み取れませんでした。",
     "noVisionBadge": "画像不可",
-    "visionWarning": "{model} は画像を受け付けません。ビジョン モデルまたは「自動」を選択してください。"
+    "visionWarning": "{model} は画像を受け付けません。ビジョン モデルまたは「自動」を選択してください。",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "会話",
@@ -1026,7 +1028,11 @@
       "dsh": "DeepSeek のハーネス。各プロバイダーを切り替え可能なルートとして保持します。",
       "mimo": "Xiaomi のターミナルエージェント。OpenCode のフォークで、OpenAI 互換なら何でも使えます。",
       "cursor": "AI 前提のエディター。Cursor のクラウド経由なので公開 URL が必要です。",
-      "generic": "OpenAI API を話すその他のツール。ベース URL とキーを手動で設定します。"
+      "generic": "OpenAI API を話すその他のツール。ベース URL とキーを手動で設定します。",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

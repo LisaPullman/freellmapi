@@ -7,7 +7,22 @@
       "Bash(python3 -c \":*)",
       "Bash(git rm *)",
       "Bash(rm -rf client/.git)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(grep -v \":0$\")",
+      "Bash(sort -t: -k2 -nr)",
+      "Bash(ls *)",
+      "Bash(git check-ignore *)",
+      "Bash(git ls-tree *)",
+      "Bash(git status *)",
+      "Bash(git ls-remote *)",
+      "Bash(python3 -c \"import json,sys; print\\(json.load\\(sys.stdin\\)['scripts']\\)\")",
+      "Bash(npm test *)",
+      "Bash(lsof -nP -iTCP:8787 -iTCP:5173 -sTCP:LISTEN)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8787/healthz)",
+      "Bash(curl -s -o /dev/null -w \" %{http_code}\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/healthz)",
+      "Bash(curl -s http://localhost:3001/healthz)"
     ]
   }
 }

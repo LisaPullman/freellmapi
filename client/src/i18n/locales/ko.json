@@ -781,7 +781,9 @@
     "attachUnsupported": "{name}은(는) 지원되지 않습니다. 이미지(PNG, JPEG, WebP, GIF) 또는 텍스트 파일(TXT, MD, CSV, JSON, LOG)을 첨부하세요.",
     "attachFailed": "{name}을(를) 읽을 수 없습니다.",
     "noVisionBadge": "이미지 불가",
-    "visionWarning": "{model}은(는) 이미지를 지원하지 않습니다. 이미지 입력이 가능한 모델 또는 자동을 선택하세요."
+    "visionWarning": "{model}은(는) 이미지를 지원하지 않습니다. 이미지 입력이 가능한 모델 또는 자동을 선택하세요.",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "대화",
@@ -1026,7 +1028,11 @@
       "dsh": "DeepSeek의 하네스. 공급자마다 전환 가능한 경로로 보관합니다.",
       "mimo": "샤오미의 터미널 에이전트. OpenCode 포크로 OpenAI 호환 공급자를 모두 받습니다.",
       "cursor": "AI 중심 편집기. Cursor 클라우드를 거치므로 공개 URL이 필요합니다.",
-      "generic": "OpenAI API를 쓰는 다른 모든 도구. 기본 URL과 키로 직접 설정합니다."
+      "generic": "OpenAI API를 쓰는 다른 모든 도구. 기본 URL과 키로 직접 설정합니다.",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

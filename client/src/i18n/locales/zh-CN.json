@@ -781,7 +781,9 @@
     "attachUnsupported": "不支持 {name}。请附加图像（PNG、JPEG、WebP、GIF）或文本文件（TXT、MD、CSV、JSON、LOG）。",
     "attachFailed": "无法读取 {name}。",
     "noVisionBadge": "不支持图像",
-    "visionWarning": "{model} 不接受图像。请选择视觉模型或「自动」。"
+    "visionWarning": "{model} 不接受图像。请选择视觉模型或「自动」。",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "对话",
@@ -1026,7 +1028,11 @@
       "dsh": "DeepSeek 的框架，把每个供应商都存成可随时切换的线路。",
       "mimo": "小米的终端智能体，OpenCode 分支，可接任意 OpenAI 兼容供应商。",
       "cursor": "以 AI 为核心的编辑器，请求走 Cursor 云端，因此需要公网 URL。",
-      "generic": "其他任何说 OpenAI 接口的工具，用基础 URL 和密钥手动配置。"
+      "generic": "其他任何说 OpenAI 接口的工具，用基础 URL 和密钥手动配置。",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

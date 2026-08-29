@@ -781,7 +781,9 @@
     "attachUnsupported": "Ba a goyi bayan {name} ba. Haɗa hotuna (PNG, JPEG, WebP, GIF) ko fayilolin rubutu (TXT, MD, CSV, JSON, LOG).",
     "attachFailed": "Ba a iya karanta {name} ba.",
     "noVisionBadge": "Babu hotuna",
-    "visionWarning": "{model} ba ya karɓar hotuna. Zaɓi samfurin da ke karɓar hotuna ko Auto."
+    "visionWarning": "{model} ba ya karɓar hotuna. Zaɓi samfurin da ke karɓar hotuna ko Auto.",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "Tattaunawa",
@@ -1026,7 +1028,11 @@
       "dsh": "DeepSeek's harness, which keeps every provider as a route you can switch between.",
       "mimo": "Xiaomi's terminal agent, an OpenCode fork that takes any OpenAI-compatible provider.",
       "cursor": "The AI-first editor; it calls through Cursor's cloud, so it needs a public URL.",
-      "generic": "Anything else that speaks the OpenAI API, set up by hand from a base URL and key."
+      "generic": "Anything else that speaks the OpenAI API, set up by hand from a base URL and key.",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

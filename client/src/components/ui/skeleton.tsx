@@ -2,13 +2,15 @@ import type { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
 
 // Loading placeholder. Pages compose these instead of a bare "Loading…" line so
-// the layout keeps its shape while data arrives.
+// the layout keeps its shape while data arrives. The pulse + base colour come
+// from brand.css ([data-slot="skeleton"]) so the shimmer wears the brand tint
+// without every call site having to remember a new utility.
 function Skeleton({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="skeleton"
       aria-hidden="true"
-      className={cn('animate-pulse rounded-lg bg-muted', className)}
+      className={cn('rounded-lg', className)}
       {...props}
     />
   )

@@ -781,7 +781,9 @@
     "attachUnsupported": "{name} tidak didukung. Lampirkan gambar (PNG, JPEG, WebP, GIF) atau file teks (TXT, MD, CSV, JSON, LOG).",
     "attachFailed": "Tidak dapat membaca {name}.",
     "noVisionBadge": "Tanpa gambar",
-    "visionWarning": "{model} tidak menerima gambar. Pilih model visi atau Otomatis."
+    "visionWarning": "{model} tidak menerima gambar. Pilih model visi atau Otomatis.",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "Percakapan",
@@ -1026,7 +1028,11 @@
       "dsh": "Kerangka DeepSeek, yang menyimpan tiap penyedia sebagai rute yang bisa Anda ganti.",
       "mimo": "Agen terminal dari Xiaomi, cabang OpenCode yang menerima penyedia apa pun yang kompatibel dengan OpenAI.",
       "cursor": "Penyunting yang mengutamakan AI; lewat awan Cursor, jadi perlu URL publik.",
-      "generic": "Perkakas lain mana pun yang berbicara API OpenAI, disiapkan manual dengan URL dasar dan kunci."
+      "generic": "Perkakas lain mana pun yang berbicara API OpenAI, disiapkan manual dengan URL dasar dan kunci.",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

@@ -781,7 +781,9 @@
     "attachUnsupported": "{name} không được hỗ trợ. Hãy đính kèm hình ảnh (PNG, JPEG, WebP, GIF) hoặc tệp văn bản (TXT, MD, CSV, JSON, LOG).",
     "attachFailed": "Không thể đọc {name}.",
     "noVisionBadge": "Không hình ảnh",
-    "visionWarning": "{model} không chấp nhận hình ảnh. Hãy chọn một mô hình hỗ trợ hình ảnh hoặc Tự động."
+    "visionWarning": "{model} không chấp nhận hình ảnh. Hãy chọn một mô hình hỗ trợ hình ảnh hoặc Tự động.",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "Cuộc trò chuyện",
@@ -1026,7 +1028,11 @@
       "dsh": "Bộ khung của DeepSeek, giữ mỗi nhà cung cấp thành một tuyến có thể chuyển đổi.",
       "mimo": "Tác nhân dòng lệnh của Xiaomi, nhánh của OpenCode, nhận mọi nhà cung cấp tương thích OpenAI.",
       "cursor": "Trình soạn thảo lấy AI làm gốc; đi qua đám mây của Cursor nên cần URL công khai.",
-      "generic": "Mọi công cụ khác nói API OpenAI, thiết lập thủ công bằng URL cơ sở và khóa."
+      "generic": "Mọi công cụ khác nói API OpenAI, thiết lập thủ công bằng URL cơ sở và khóa.",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

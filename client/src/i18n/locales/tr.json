@@ -781,7 +781,9 @@
     "attachUnsupported": "{name} desteklenmiyor. Görüntü (PNG, JPEG, WebP, GIF) veya metin dosyaları (TXT, MD, CSV, JSON, LOG) ekleyin.",
     "attachFailed": "{name} okunamadı.",
     "noVisionBadge": "Görüntü yok",
-    "visionWarning": "{model} görüntü kabul etmiyor. Görüntü destekleyen bir model veya Otomatik seçin."
+    "visionWarning": "{model} görüntü kabul etmiyor. Görüntü destekleyen bir model veya Otomatik seçin.",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "Sohbetler",
@@ -1026,7 +1028,11 @@
       "dsh": "DeepSeek'in koşum takımı; her sağlayıcıyı geçiş yapılabilir bir rota olarak tutar.",
       "mimo": "Xiaomi'nin terminal ajanı; OpenAI uyumlu her sağlayıcıyı kabul eden bir OpenCode çatallaması.",
       "cursor": "Yapay zekâ odaklı düzenleyici; Cursor bulutundan geçtiği için herkese açık bir URL ister.",
-      "generic": "OpenAI API'sini konuşan diğer her araç; temel URL ve anahtarla elle kurulur."
+      "generic": "OpenAI API'sini konuşan diğer her araç; temel URL ve anahtarla elle kurulur.",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

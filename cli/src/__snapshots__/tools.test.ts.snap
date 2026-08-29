@@ -146,6 +146,17 @@ model_provider = "freellmapi"
 }
 `;
 
+exports[`tool generators > setup-cody has stable golden output 1`] = `
+{
+  "files": [],
+  "notes": [
+    "Cody only accepts custom OpenAI-compatible chat models through a Cody Enterprise server config, never through local extension settings.",
+    "On the server side, point the provider at http://localhost:3000/v1 with the unified key and model fast-coder.",
+    "Without Enterprise, the extension talks to Sourcegraph-hosted models and cannot be retargeted here.",
+  ],
+}
+`;
+
 exports[`tool generators > setup-continue has stable golden output 1`] = `
 {
   "files": [
@@ -482,6 +493,28 @@ exports[`tool generators > setup-opencode has stable golden output 1`] = `
 }
 `;
 
+exports[`tool generators > setup-pearai has stable golden output 1`] = `
+{
+  "files": [],
+  "notes": [
+    "PearAI is a VS Code fork whose model endpoints live in the app settings UI, not in a file the CLI can patch.",
+    "In PearAI Settings, add a custom OpenAI-compatible provider with base URL http://localhost:3000/v1 and the unified key.",
+    "Model: fast-coder.",
+  ],
+}
+`;
+
+exports[`tool generators > setup-plandex has stable golden output 1`] = `
+{
+  "files": [],
+  "notes": [
+    "Plandex manages custom models through its own CLI, so there is no config file to patch: run \`plandex models custom\` and register an OpenAI-compatible provider.",
+    "Base URL: http://localhost:3000/v1 — API key: freellmapi-test-key — model: fast-coder",
+    "Select it per-plan afterwards with \\set-model in the REPL or \`plandex set-model\`.",
+  ],
+}
+`;
+
 exports[`tool generators > setup-qwen has stable golden output 1`] = `
 {
   "files": [
@@ -563,6 +596,17 @@ exports[`tool generators > setup-roo has stable golden output 1`] = `
   ],
   "notes": [
     "Set Roo Code's autoImportSettingsPath to /home/tester/.roo/freellmapi.json.",
+  ],
+}
+`;
+
+exports[`tool generators > setup-windsurf has stable golden output 1`] = `
+{
+  "files": [],
+  "notes": [
+    "Windsurf routes its built-in Cascade models through Codeium's cloud; a custom endpoint is entered in the app, not a file.",
+    "Open Windsurf Settings → Models, add a custom OpenAI-compatible model with base URL http://localhost:3000/v1 and the unified key.",
+    "Model: fast-coder. Localhost is fine — Windsurf runs on the same machine as the gateway.",
   ],
 }
 `;

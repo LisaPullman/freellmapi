@@ -2,11 +2,14 @@
 
 # FreeLLMAPI documentation
 
-The root [README](../README.md) is the product overview; the detailed guides live here.
+The root [README](../README.md) is the **foxai** variant overview (this fork's brand layer,
+trade-offs, and local-startup steps). The detailed guides live here. The upstream
+[FreeLLMAPI README](upstream.md) is preserved as a reference of what shipped before the fork.
 
 ## Guides
 
 - **[Install & deploy](install.md)** — quick start, Docker Compose, local development, declarative startup config, the Docker image, backups, the desktop app, where your data lives, and an FAQ on password resets, logs and uninstalling.
+- **[Upstream overview](upstream.md)** — the original FreeLLMAPI README. Kept as a reference of the feature surface (providers, billing model, compatibility list) that the fork inherited unchanged.
 - **[API reference](api.md)** — chat completions, `auto:*` routing strategies, streaming, tool calling, vision, Gemini Google Search grounding, embeddings, response headers, and the Anthropic Messages surface.
 - **[Clients & coding agents](clients.md)** — OpenAI-compatible clients, recipes for Claude Code / Codex CLI / Cline / Continue / Aider / opencode / Cursor, the MCP server, editor autocomplete, and Context Handoff.
 - **[Prompt compression](compression.md)** — request-side modes, safeguards, per-request controls, custom tool-output filters, statistics, and preview APIs.

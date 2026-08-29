@@ -25,9 +25,23 @@ const ICONS = {
 } as const
 
 const ICON_CLASS = {
-  success: 'text-emerald-600 dark:text-emerald-400',
+  // Success wears the brand so a positive confirmation feels like the
+  // product talking, not a system event. Errors keep their destructive
+  // red — a copy button succeeding and a key failing should never look
+  // alike, even at a glance.
+  success: 'text-brand',
   error: 'text-destructive',
   info: 'text-muted-foreground',
+} as const
+
+// A 2px brand rail on the leading edge so a quick glance at the stack
+// (or a peripheral-vision check) can tell success apart from info/error
+// before the eye reaches the icon. Errors stay borderless — the icon
+// already screams red, doubling it would read as alarmist.
+const RAIL_CLASS = {
+  success: 'border-l-2 border-l-brand',
+  error: '',
+  info: '',
 } as const
 
 function Toast({ toast }: { toast: ToastItem }) {
@@ -66,7 +80,7 @@ function Toast({ toast }: { toast: ToastItem }) {
       ref={nodeRef}
       role={toast.kind === 'error' ? 'alert' : 'status'}
       aria-live={toast.kind === 'error' ? 'assertive' : 'polite'}
-      className="pointer-events-auto flex items-start gap-2.5 rounded-2xl border bg-card px-3.5 py-2.5 shadow-lg animate-in slide-in-from-bottom-2 fade-in duration-200"
+      className={`pointer-events-auto flex items-start gap-2.5 rounded-2xl border bg-card pl-3 pr-3.5 py-2.5 shadow-lg animate-in slide-in-from-bottom-2 fade-in duration-200 ${RAIL_CLASS[toast.kind]}`}
     >
       <Icon className={`mt-0.5 size-4 shrink-0 ${ICON_CLASS[toast.kind]}`} />
       <p className="min-w-0 flex-1 break-words text-sm leading-snug">{toast.message}</p>

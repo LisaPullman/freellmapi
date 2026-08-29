@@ -781,7 +781,9 @@
     "attachUnsupported": "{name} غير مدعوم. أرفق صورًا (PNG، JPEG، WebP، GIF) أو ملفات نصية (TXT، MD، CSV، JSON، LOG).",
     "attachFailed": "تعذّرت قراءة {name}.",
     "noVisionBadge": "بدون صور",
-    "visionWarning": "{model} لا يقبل الصور. اختر نموذج رؤية أو «تلقائي»."
+    "visionWarning": "{model} لا يقبل الصور. اختر نموذج رؤية أو «تلقائي».",
+    "resetSampling": "Reset {label} to default",
+    "clearSystemPrompt": "Clear system prompt"
   },
   "playgroundSessions": {
     "heading": "المحادثات",
@@ -1026,7 +1028,11 @@
       "dsh": "إطار DeepSeek، يحفظ كل مزوّد كمسار يمكنك التبديل بينه وبين غيره.",
       "mimo": "وكيل الطرفية من Xiaomi، اشتقاق من OpenCode يقبل أي مزوّد متوافق مع OpenAI.",
       "cursor": "المحرّر القائم على الذكاء الاصطناعي؛ يمرّ عبر سحابة Cursor، لذا يحتاج عنوان URL عامًا.",
-      "generic": "أي أداة أخرى تتحدث واجهة OpenAI، تُضبط يدويًا بعنوان أساسي ومفتاح."
+      "generic": "أي أداة أخرى تتحدث واجهة OpenAI، تُضبط يدويًا بعنوان أساسي ومفتاح.",
+      "plandex": "AI coding agent for large, multi-step tasks across many files. Uses the OpenAI Chat protocol.",
+      "windsurf": "AI-powered IDE with Cascade, a built-in coding agent. Configurable to any OpenAI-compatible endpoint.",
+      "cody": "Sourcegraph's AI coding assistant. Connects to any OpenAI-compatible provider.",
+      "pearai": "Open-source AI code editor forked from VS Code. Uses the OpenAI Chat protocol."
     }
   },
   "update": {

@@ -1,8 +1,9 @@
-import { PanelRightClose, PanelRightOpen } from 'lucide-react'
+import { PanelRightClose, PanelRightOpen, RotateCcw, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { ModelCombobox, type ModelComboOption } from '@/components/model-combobox'
 import {
+  DEFAULT_SAMPLING,
   SAMPLING_FIELDS,
   SAMPLING_RANGES,
   formatSamplingValue,
@@ -68,6 +69,18 @@ function SamplingControlRow({
   const control = settings[field]
   const label = t(FIELD_LABEL_KEYS[field])
 
+  // A reset only earns its place when the dialled-in value has actually drifted
+  // from the default — otherwise the icon would be a permanent no-op that
+  // trains the eye to ignore it.
+  const defaultValue = DEFAULT_SAMPLING[field].value
+  const isDirty = Math.abs(control.value - defaultValue) > 1e-9
+
+  // --p drives the brand-coloured track fill (see brand.css). Browsers that
+  // don't read the variable still get the native accent-coloured thumb.
+  const percent = range.max === range.min
+    ? 0
+    : ((control.value - range.min) / (range.max - range.min)) * 100
+
   return (
     <div className="space-y-1.5">
       <div className="flex items-center gap-2">
@@ -84,6 +97,17 @@ function SamplingControlRow({
             ? formatSamplingValue(field, control.value)
             : t('playground.samplingDefault')}
         </span>
+        {isDirty && (
+          <button
+            type="button"
+            aria-label={t('playground.resetSampling', { label })}
+            title={t('playground.resetSampling', { label })}
+            onClick={() => onChange(setSamplingValue(settings, field, defaultValue))}
+            className="flex size-5 items-center justify-center rounded-md text-muted-foreground/60 transition-colors hover:bg-[var(--brand-muted)] hover:text-foreground"
+          >
+            <RotateCcw className="size-3" />
+          </button>
+        )}
         <Switch
           size="sm"
           aria-label={label}
@@ -119,7 +143,8 @@ function SamplingControlRow({
           value={control.value}
           onChange={e => onChange(setSamplingValue(settings, field, Number(e.target.value)))}
           aria-label={label}
-          className="w-full cursor-pointer accent-primary disabled:cursor-not-allowed disabled:opacity-50"
+          style={{ '--p': `${percent}%` } as React.CSSProperties}
+          className="brand-track w-full disabled:cursor-not-allowed disabled:opacity-50"
         />
       )}
     </div>
@@ -213,6 +238,17 @@ export function SettingsRail({
             <label htmlFor="playground-system-prompt" className="flex items-center gap-1.5 text-xs font-medium">
               {t('playground.systemPromptLabel')}
               {systemPrompt.trim() && <span className="size-1.5 rounded-full bg-primary/70" />}
+              {systemPrompt.trim() && (
+                <button
+                  type="button"
+                  aria-label={t('playground.clearSystemPrompt')}
+                  title={t('playground.clearSystemPrompt')}
+                  onClick={() => onSystemPromptChange('')}
+                  className="ms-auto flex size-5 items-center justify-center rounded-md text-muted-foreground/60 transition-colors hover:bg-[var(--brand-muted)] hover:text-foreground"
+                >
+                  <X className="size-3" />
+                </button>
+              )}
             </label>
             <textarea
               id="playground-system-prompt"
