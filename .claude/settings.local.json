@@ -22,7 +22,11 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8787/healthz)",
       "Bash(curl -s -o /dev/null -w \" %{http_code}\" http://localhost:5173/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/healthz)",
-      "Bash(curl -s http://localhost:3001/healthz)"
+      "Bash(curl -s http://localhost:3001/healthz)",
+      "Bash(sips *)",
+      "Bash(python3 -m http.server 8799)",
+      "Bash(pkill -f \"chrome-devtools-mcp/chrome-profile\")",
+      "Bash(/usr/bin/python3 *)"
     ]
   }
 }
