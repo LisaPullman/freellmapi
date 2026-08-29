@@ -1,0 +1,52 @@
+/* foxai brand layer ----------------------------------------------------------
+   Additive by design. This file introduces the brand accent and a real
+   categorical chart palette; every neutral in index.css is left alone, so the
+   dashboard keeps its greyscale calm and the one accent stays meaningful.
+
+   Kept out of index.css so `git pull upstream main` never conflicts here.
+
+   The doubled `:root:root` selector is deliberate. CSS requires @import to
+   precede other rules, so this file is pulled in *above* index.css's own
+   `:root` block — the extra specificity is what makes these values win
+   regardless of source order. */
+
+@theme inline {
+    --color-brand: var(--brand);
+    --color-brand-foreground: var(--brand-foreground);
+    --color-brand-muted: var(--brand-muted);
+}
+
+:root:root {
+    /* Ember — #E2571F */
+    --brand: oklch(0.633 0.185 39.6);
+    --brand-foreground: oklch(0.99 0 0);
+    --brand-muted: oklch(0.633 0.185 39.6 / 12%);
+
+    /* Focus rings carry the brand instead of a mid grey. */
+    --ring: oklch(0.633 0.185 39.6);
+
+    /* chart-1..5 shipped as a five-step grey ramp, which makes two series on
+       one axis nearly impossible to tell apart. This is a categorical palette:
+       distinct in hue, close in lightness, and it survives greyscale printing
+       because the ramp still steps. */
+    --chart-1: oklch(0.633 0.185 39.6);  /* brand orange */
+    --chart-2: oklch(0.592 0.154 253.5); /* blue   */
+    --chart-3: oklch(0.638 0.125 166.1); /* teal   */
+    --chart-4: oklch(0.606 0.219 292.7); /* violet */
+    --chart-5: oklch(0.554 0.041 257.4); /* slate  */
+}
+
+:root.dark {
+    /* Ember lifted for dark surfaces — #FF7A4D */
+    --brand: oklch(0.727 0.173 39);
+    --brand-foreground: oklch(0.16 0 0);
+    --brand-muted: oklch(0.727 0.173 39 / 16%);
+
+    --ring: oklch(0.727 0.173 39);
+
+    --chart-1: oklch(0.727 0.173 39);
+    --chart-2: oklch(0.7 0.123 250.3);
+    --chart-3: oklch(0.718 0.132 167.3);
+    --chart-4: oklch(0.709 0.159 293.5);
+    --chart-5: oklch(0.711 0.035 256.8);
+}

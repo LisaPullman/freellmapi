@@ -427,7 +427,7 @@ function RequestDetailDialog({ requestId, onClose }: { requestId: number | null;
 
 const axisStyle = { fontSize: 11, fill: 'var(--muted-foreground)' } as const
 const gridStyle = 'var(--border)'
-const primaryFill = 'var(--foreground)'
+const primaryFill = 'var(--chart-1)'
 const tooltipStyle = { backgroundColor: 'var(--popover)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 12 } as const
 
 // The timeline endpoint buckets on the viewer's wall clock (the query sends
@@ -451,13 +451,12 @@ function formatTimelineTick(value: string): string {
 // checker. Slot A (blue) = the "average / input" series; slot B (aqua) = the
 // "p95 / output" series. The app's own --chart-* tokens are all grayscale
 // (zero chroma), which fails the CVD separation check for a two-series chart,
-// so we take the nearest passing categorical hues and theme them here.
-const seriesA = 'var(--series-a)'
-const seriesB = 'var(--series-b)'
-const chartVars = `
-.analytics-viz { --series-a: #2a78d6; --series-b: #1baf7a; }
-.dark .analytics-viz { --series-a: #3987e5; --series-b: #199e70; }
-`
+// so we use the brand's categorical --chart-* tokens (Ember/blue/teal) — they
+// pass CVD separation and pick up the light/dark theme automatically. No
+// scoped <style> is needed anymore.
+const seriesA = 'var(--chart-2)'
+const seriesB = 'var(--chart-3)'
+const chartVars = ''
 
 export default function AnalyticsPage() {
   const { t } = useI18n()
@@ -598,7 +597,6 @@ export default function AnalyticsPage() {
 
   return (
     <div className="analytics-viz">
-      <style>{chartVars}</style>
       <PageHeader
         title={t('analytics.title')}
         description={t('analytics.description')}

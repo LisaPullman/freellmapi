@@ -1,9 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <!-- FreeLLMAPI mark: the brand dot inside a broken routing ring.
-       The gap in the ring is the "fallback" — traffic re-routes around it. -->
-  <rect width="64" height="64" rx="14" fill="#09090b"/>
-  <circle cx="32" cy="32" r="9.5" fill="#fafafa"/>
-  <circle cx="32" cy="32" r="18" fill="none" stroke="#fafafa" stroke-opacity=".4"
-          stroke-width="3.5" stroke-linecap="round" stroke-dasharray="86 27"
-          transform="rotate(-60 32 32)"/>
+  <!-- foxai · Trace mark on an Ember tile. Same trick the previous favicon
+       used (opaque background, reversed mark) so the strokes survive at the
+       16/20px sizes browsers and OS tabs actually render. -->
+  <rect width="64" height="64" rx="14" fill="#E2571F"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M23 55V22c0-7.2 5.8-13 13-13h2"/>
+    <path d="M12.5 31h21"/>
+  </g>
+  <circle cx="49" cy="9" r="5.5" fill="#FFFFFF"/>
 </svg>

@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, NavLink, Link, useLocation, useNavigate } from 'react-router-dom'
 import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ChevronDown, KeyRound, LogOut, Menu, MoreHorizontal, Search, Settings, Sparkles } from 'lucide-react'
+import { Lockup } from '@/brand/logo'
 import { buttonVariants } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -112,7 +113,7 @@ function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
       className={({ isActive }) =>
         `relative text-sm px-1 py-4 transition-colors ${
           isActive
-            ? 'text-foreground after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-foreground'
+            ? 'text-foreground after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-brand'
             : 'text-muted-foreground hover:text-foreground'
         }`
       }
@@ -124,9 +125,12 @@ function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
 
 function Brand() {
   return (
-    <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-70">
-      <span className="inline-block size-2 rounded-full bg-foreground" />
-      <span className="font-semibold tracking-tight text-sm">FreeLLMAPI</span>
+    <Link
+      to="/"
+      aria-label="foxai"
+      className="flex items-center transition-opacity hover:opacity-70"
+    >
+      <Lockup size={22} title="foxai" />
     </Link>
   )
 }

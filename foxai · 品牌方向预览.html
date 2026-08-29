@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>foxai · 品牌方向预览</title>
+<style>
+  :root {
+    --bg: #fdfdfd;
+    --card: #ffffff;
+    --fg: #1a1a1a;
+    --dim: #767676;
+    --line: #e8e8e8;
+    --accent: #e2571f;
+    --radius: 16px;
+  }
+  .dark {
+    --bg: #101010;
+    --card: #1b1b1b;
+    --fg: #fafafa;
+    --dim: #a1a1a1;
+    --line: rgba(255,255,255,.11);
+    --accent: #ff7a4d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 32px 96px;
+    transition: background .2s, color .2s;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+
+  header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 8px; }
+  h1 { font-size: 26px; letter-spacing: -.02em; font-weight: 640; }
+  .sub { color: var(--dim); font-size: 14px; margin-top: 6px; max-width: 62ch; line-height: 1.6; }
+
+  .controls { display: flex; gap: 8px; flex-shrink: 0; }
+  button {
+    font: inherit; font-size: 13px; padding: 7px 14px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--card); color: var(--fg);
+    cursor: pointer; transition: border-color .15s;
+  }
+  button:hover { border-color: var(--dim); }
+  button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+  h2 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--dim); font-weight: 600; margin: 56px 0 16px;
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); overflow: hidden; }
+  .card-top { padding: 32px 24px 28px; display: flex; align-items: center; justify-content: center; min-height: 168px; }
+  .card-meta { padding: 16px 20px 20px; border-top: 1px solid var(--line); }
+  .name { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .desc { font-size: 12.5px; color: var(--dim); line-height: 1.65; margin-top: 5px; }
+  .tag {
+    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--dim); margin-top: 10px;
+  }
+
+  /* size ladder */
+  .sizes { display: flex; align-items: flex-end; gap: 22px; justify-content: center; padding: 26px 20px; }
+  .size-item { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+  .size-label { font-size: 10.5px; color: var(--dim); font-variant-numeric: tabular-nums; }
+
+  .mark { color: var(--accent); display: block; }
+  .mark.mono { color: var(--fg); }
+
+  /* wordmark lockup */
+  .lockup { display: flex; align-items: center; gap: 10px; }
+  .wordmark { font-size: 19px; font-weight: 620; letter-spacing: -.025em; }
+  .wordmark .ai { color: var(--accent); }
+
+  /* navbar mock */
+  .nav {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+    display: flex; align-items: center; gap: 26px; padding: 0 18px; height: 54px;
+  }
+  .nav .lockup { margin-right: 12px; }
+  .nav .wordmark { font-size: 14.5px; }
+  .nav-link { font-size: 13.5px; color: var(--dim); }
+  .nav-link.active { color: var(--fg); font-weight: 500; position: relative; }
+  .nav-link.active::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -19px; height: 1.5px; background: var(--accent);
+  }
+
+  /* palette */
+  .swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .swatches { grid-template-columns: 1fr; } }
+  .sw-row { display: flex; height: 76px; border-radius: 12px 12px 0 0; overflow: hidden; }
+  .sw { flex: 1; }
+  .sw-body { border: 1px solid var(--line); border-top: none; border-radius: 0 0 12px 12px; padding: 14px 16px 16px; }
+  .hexes { display: flex; gap: 10px; margin-top: 8px; font-size: 11px; color: var(--dim); font-family: ui-monospace, Menlo, monospace; }
+
+  /* chart demo */
+  .chart-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 20px 22px 14px; }
+  .chart-title { font-size: 13.5px; font-weight: 560; }
+  .legend { display: flex; gap: 16px; margin-top: 4px; font-size: 11.5px; color: var(--dim); }
+  .legend span { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 99px; }
+
+  .note {
+    margin-top: 18px; font-size: 12.5px; color: var(--dim); line-height: 1.7;
+    border-left: 2px solid var(--line); padding-left: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>foxai · 品牌方向预览</h1>
+      <p class="sub">三个标记方向 × 三套配色。每个标记都按 favicon(16px)和 macOS 托盘单色图标的约束设计——纯剪影可辨识,不依赖渐变。挑一个方向,我再落地到代码。</p>
+    </div>
+    <div class="controls">
+      <button id="theme-btn" aria-pressed="false">切换暗色</button>
+    </div>
+  </header>
+
+  <!-- ============ 标记方向 ============ -->
+  <h2>方向 A / B / C</h2>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-top">
+        <svg class="mark" width="104" height="104" viewBox="0 0 64 64" fill="currentColor" fill-rule="evenodd">
+          <path d="M8.5 5.5 24.5 17h15L55.5 5.5V26.5C55.5 36.5 47 47 32 57.5 17 47 8.5 36.5 8.5 26.5ZM22.5 26.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 1 0 0-5.6ZM41.5 26.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 1 0 0-5.6ZM32 36.7a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 1 0 0-7.6Z"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <div class="name">A · Kit(几何狐首)</div>
+        <p class="desc">最具象、最好记。双耳缺口 + 尖下巴的经典折纸狐造型,眼睛与鼻头是真实镂空,所以单色托盘图标依然成立。鼻头那颗圆点呼应原项目「路由节点」的语义。</p>
+        <span class="tag">辨识度最高</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <svg class="mark" width="104" height="104" viewBox="0 0 64 64" fill="currentColor" fill-rule="evenodd">
+          <path d="M32 46 7 6l19 14h12L57 6ZM22 25.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 1 0 0-5ZM42 25.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 1 0 0-5Z"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <div class="name">B · Prism(棱面狐面)</div>
+        <p class="desc">把狐首压成一个尖锐的多边形:两只耳朵同时是两条分叉的路由线,汇聚到底部的一个点——正好是「一个入口,多个上游」的形状。比 A 更抽象、更硬朗。</p>
+        <span class="tag">最贴合路由语义</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <svg class="mark" width="104" height="104" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round">
+          <path d="M23 55V22c0-7.2 5.8-13 13-13h2"/>
+          <path d="M12.5 31h21"/>
+          <circle cx="49" cy="9" r="5.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="card-meta">
+        <div class="name">C · Trace(字母 f + 终点节点)</div>
+        <p class="desc">最克制的一版。字母 f 本身画成一条路由路径,末端悬着一个独立节点。和现有界面的极简灰阶语言最贴,但「狐」的意象最弱。</p>
+        <span class="tag">最百搭</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 尺寸阶梯 ============ -->
+  <h2>尺寸阶梯 · 128 / 48 / 24 / 16 px</h2>
+  <div class="grid">
+    <div class="card"><div class="sizes" id="ladder-a"></div></div>
+    <div class="card"><div class="sizes" id="ladder-b"></div></div>
+    <div class="card"><div class="sizes" id="ladder-c"></div></div>
+  </div>
+
+  <!-- ============ 单色托盘测试 ============ -->
+  <h2>单色剪影 · macOS 托盘图标(系统会强制单色反色)</h2>
+  <div class="grid">
+    <div class="card"><div class="sizes" id="mono-a"></div></div>
+    <div class="card"><div class="sizes" id="mono-b"></div></div>
+    <div class="card"><div class="sizes" id="mono-c"></div></div>
+  </div>
+
+  <!-- ============ 组合锁定 ============ -->
+  <h2>标记 + 文字组合</h2>
+  <div class="grid" id="lockups"></div>
+
+  <!-- ============ 导航栏实景 ============ -->
+  <h2>放进真实导航栏</h2>
+  <div style="display:grid; gap:14px;" id="navs"></div>
+
+  <!-- ============ 配色 ============ -->
+  <h2>三套主色(当前界面是纯灰阶,只加这一个强调色就足够拉开层次)</h2>
+  <div class="swatches">
+    <div>
+      <div class="sw-row">
+        <div class="sw" style="background:#e2571f"></div>
+        <div class="sw" style="background:#ff7a4d"></div>
+        <div class="sw" style="background:#ffd9c9"></div>
+      </div>
+      <div class="sw-body">
+        <div class="name">Ember · 狐橙</div>
+        <p class="desc">最直给的「狐」联想,活力强。风险是开发者工具里橙色已经很多。</p>
+        <div class="hexes"><span>#E2571F 亮</span><span>#FF7A4D 暗</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="sw-row">
+        <div class="sw" style="background:#c77a00"></div>
+        <div class="sw" style="background:#f0a93b"></div>
+        <div class="sw" style="background:#ffe9c2"></div>
+      </div>
+      <div class="sw-body">
+        <div class="name">Amber · 琥珀金</div>
+        <p class="desc">更暖更柔,和灰阶底子最协调,长时间看不刺眼。个性稍弱。</p>
+        <div class="hexes"><span>#C77A00 亮</span><span>#F0A93B 暗</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="sw-row">
+        <div class="sw" style="background:#a8431e"></div>
+        <div class="sw" style="background:#d9764e"></div>
+        <div class="sw" style="background:#f3d3c6"></div>
+      </div>
+      <div class="sw-body">
+        <div class="name">Rust · 赤陶</div>
+        <p class="desc">最沉稳、最「贵」的一版,偏品牌感而非工具感。在暗色下表现最好。</p>
+        <div class="hexes"><span>#A8431E 亮</span><span>#D9764E 暗</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">
+    配色可以和标记自由组合。切到暗色模式看一眼——三套主色在暗背景下都做了提亮,保证正文对比度过 WCAG AA。
+  </p>
+
+  <!-- ============ 图表配色 ============ -->
+  <h2>顺带:图表配色(现在 chart-1..5 是五级灰,折线几乎分不开)</h2>
+  <div class="chart-card">
+    <div class="chart-title">Tokens over time</div>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--accent)"></i>Input</span>
+      <span><i class="dot" style="background:#2f7fd6"></i>Output</span>
+      <span><i class="dot" style="background:#1fa37a"></i>Cached</span>
+      <span><i class="dot" style="background:#8b5cf6"></i>Reasoning</span>
+    </div>
+    <svg viewBox="0 0 720 190" style="width:100%; height:auto; margin-top:14px; overflow:visible">
+      <defs>
+        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity=".22"/>
+          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <g stroke="var(--line)" stroke-dasharray="2 5">
+        <line x1="0" y1="20" x2="720" y2="20"/><line x1="0" y1="65" x2="720" y2="65"/>
+        <line x1="0" y1="110" x2="720" y2="110"/><line x1="0" y1="155" x2="720" y2="155"/>
+      </g>
+      <path d="M0 150C90 150 130 60 200 52s110 62 190 55 130-78 200-88 130 26 130 26" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M0 150C90 150 130 60 200 52s110 62 190 55 130-78 200-88 130 26 130 26L720 190 0 190Z" fill="url(#fade)" stroke="none"/>
+      <path d="M0 168C90 164 140 128 210 122s120 30 195 26 135-42 195-48" fill="none" stroke="#2f7fd6" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M0 180C100 178 150 165 230 160s130 12 210 8 180-20 180-20" fill="none" stroke="#1fa37a" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M0 186C110 185 160 180 240 177s150 6 230 3 130-8 130-8" fill="none" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <p class="note">
+    左边是现在的样子(四条线都是灰的);上面是加了品牌色 + 面积渐变 + 分类调色板之后的样子。这一项改动很小,但 Analytics 页的观感差别最大。
+  </p>
+
+</div>
+
+<script>
+  const MARKS = {
+    a: `<path d="M8.5 5.5 24.5 17h15L55.5 5.5V26.5C55.5 36.5 47 47 32 57.5 17 47 8.5 36.5 8.5 26.5ZM22.5 26.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 1 0 0-5.6ZM41.5 26.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 1 0 0-5.6ZM32 36.7a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 1 0 0-7.6Z"/>`,
+    b: `<path d="M32 46 7 6l19 14h12L57 6ZM22 25.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 1 0 0-5ZM42 25.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 1 0 0-5Z"/>`,
+  };
+  const MARK_C = `<g fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round">
+      <path d="M23 55V22c0-7.2 5.8-13 13-13h2"/><path d="M12.5 31h21"/>
+      <circle cx="49" cy="9" r="5.5" fill="currentColor" stroke="none"/></g>`;
+
+  function svg(key, size, mono) {
+    const inner = key === 'c' ? MARK_C : MARKS[key];
+    const attrs = key === 'c' ? '' : ' fill="currentColor" fill-rule="evenodd"';
+    return `<svg class="mark${mono ? ' mono' : ''}" width="${size}" height="${size}" viewBox="0 0 64 64"${attrs}>${inner}</svg>`;
+  }
+
+  const SIZES = [128, 48, 24, 16];
+  for (const key of ['a', 'b', 'c']) {
+    for (const [prefix, mono] of [['ladder', false], ['mono', true]]) {
+      document.getElementById(`${prefix}-${key}`).innerHTML = SIZES
+        .map(s => `<div class="size-item">${svg(key, s, mono)}<span class="size-label">${s}</span></div>`)
+        .join('');
+    }
+  }
+
+  const LABELS = { a: 'A · Kit', b: 'B · Prism', c: 'C · Trace' };
+  document.getElementById('lockups').innerHTML = ['a', 'b', 'c'].map(k => `
+    <div class="card"><div class="card-top">
+      <div class="lockup">${svg(k, 34, false)}<span class="wordmark">fox<span class="ai">ai</span></span></div>
+    </div><div class="card-meta"><div class="name">${LABELS[k]}</div></div></div>`).join('');
+
+  document.getElementById('navs').innerHTML = ['a', 'b', 'c'].map(k => `
+    <div class="nav">
+      <div class="lockup">${svg(k, 22, false)}<span class="wordmark">fox<span class="ai">ai</span></span></div>
+      <span class="nav-link active">Models</span><span class="nav-link">Playground</span>
+      <span class="nav-link">Keys</span><span class="nav-link">Agents</span><span class="nav-link">Analytics</span>
+    </div>`).join('');
+
+  const btn = document.getElementById('theme-btn');
+  btn.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark');
+    btn.setAttribute('aria-pressed', String(dark));
+    btn.textContent = dark ? '切换亮色' : '切换暗色';
+  });
+</script>
+</body>
+</html>
