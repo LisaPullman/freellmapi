@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>foxai · 创造者,全栈交付</title>
+<meta name="description" content="foxai 个人工作站 —— 软件开发、视频制作、项目设计、创意输出,一站式数字创作解决方案。联系:foxbobby@qq.com" />
+<meta name="theme-color" content="#0E1014" />
+<meta property="og:title" content="foxai · 创造者,全栈交付" />
+<meta property="og:description" content="软件开发 / 视频制作 / 项目设计 / 创意输出 —— 一站式数字创作解决方案" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/brand-board.jpg" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"foxai","email":"mailto:foxbobby@qq.com","jobTitle":"全栈创造者","knowsAbout":["软件开发","视频制作","项目设计","创意输出"]}
+</script>
+<style>
+  /* ————————————————————————————————
+     foxai personal workstation · dark
+     tokens: foxai brand (Trace mark, Ember) × brand board palette
+     ———————————————————————————————— */
+  :root {
+    --bg: #0E1014;            /* 底色,取自品牌板 #0F1115 微调 */
+    --bg-2: #13161C;
+    --card: #171B22;
+    --line: #262B35;
+    --line-soft: #1D212A;
+    --ink: #F2EFE9;           /* 暖白,呼应品牌板奶油色 #FFE9C2 */
+    --ink-2: #C7C1B4;
+    --muted: #868D99;
+    --brand: #FF7A4D;         /* foxai Ember · dark */
+    --brand-deep: #E2571F;    /* foxai Ember · light(用于填充按钮) */
+    --brand-dim: rgba(255, 122, 77, 0.14);
+    --sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { color-scheme: dark; scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--brand); color: #14100C; }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+  a { color: inherit; text-decoration: none; }
+  [id] { scroll-margin-top: 92px; }
+  img { max-width: 100%; display: block; }
+
+  /* ——— atmosphere: grain + dotted grid + top trace ——— */
+  .grain {
+    position: fixed; inset: -50%; z-index: 40; pointer-events: none; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .trace-top {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 41;
+    background: linear-gradient(90deg, var(--brand), rgba(255,122,77,0.25) 40%, transparent 75%);
+  }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 640px) { .wrap { padding: 0 20px; } }
+
+  /* ——— nav ——— */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+    background: rgba(14, 16, 20, 0.78);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-in { display: flex; align-items: center; gap: 28px; height: 64px; }
+  .lockup { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; line-height: 1; }
+  .lockup .ai { color: var(--brand); }
+  .nav-links { display: flex; gap: 24px; margin-left: auto; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .nav-links a { transition: color .25s; position: relative; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; right: 100%; bottom: -6px; height: 1px;
+    background: var(--brand); transition: right .3s var(--ease);
+  }
+  .nav-links a:hover::after { right: 0; }
+  .nav-cta {
+    font-family: var(--mono); font-size: 12.5px; font-weight: 500;
+    color: var(--brand); border: 1px solid rgba(255, 122, 77, 0.35);
+    padding: 7px 14px; border-radius: 999px; transition: all .25s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--brand-dim); border-color: var(--brand); }
+  @media (max-width: 760px) { .nav-links { display: none; } .nav-cta { margin-left: auto; } }
+
+  /* ——— hero ——— */
+  .hero { position: relative; min-height: 94vh; display: flex; align-items: center; padding: 140px 0 90px; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(242, 239, 233, 0.055) 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 60% 30%, #000 0%, transparent 72%);
+    mask-image: radial-gradient(ellipse 90% 70% at 60% 30%, #000 0%, transparent 72%);
+  }
+  .hero::after {
+    content: ""; position: absolute; top: -20%; right: -10%; width: 60vw; height: 60vw; max-width: 900px; max-height: 900px;
+    background: radial-gradient(circle, rgba(226, 87, 31, 0.10), transparent 62%);
+    pointer-events: none;
+  }
+  .hero-ghost {
+    position: absolute; right: -4%; top: 10%; width: clamp(300px, 42vw, 560px); height: auto;
+    opacity: 1; pointer-events: none;
+    animation: drift 9s ease-in-out infinite alternate;
+  }
+  @keyframes drift { from { transform: translateY(0); } to { transform: translateY(16px); } }
+  .hero-in { position: relative; z-index: 2; width: 100%; }
+  .kicker {
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    color: var(--brand); text-transform: uppercase;
+  }
+  .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; }
+  .kicker .lead-line { flex: 1; border-top: 1px dashed rgba(255, 122, 77, 0.3); }
+  .hero h1 {
+    font-size: clamp(64px, 12vw, 148px);
+    font-weight: 900; letter-spacing: -0.045em; line-height: 1.02;
+    margin: 26px 0 6px; display: flex; align-items: baseline; gap: 0.12em; flex-wrap: wrap;
+  }
+  .hero h1 .ai { color: var(--brand); }
+  .hero h1 svg { align-self: center; }
+  .hero .role {
+    font-family: var(--mono); font-size: clamp(13px, 1.6vw, 15px); color: var(--muted);
+    letter-spacing: 0.08em; margin-bottom: 30px;
+  }
+  .hero .role b { color: var(--ink-2); font-weight: 500; }
+  .hero .lead { max-width: 34em; color: var(--ink-2); font-size: clamp(16px, 2vw, 18.5px); margin-bottom: 40px; }
+  .hero .lead em { font-style: normal; color: var(--ink); border-bottom: 1px solid rgba(255, 122, 77, 0.5); padding-bottom: 1px; }
+
+  .btn-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 15px; font-weight: 500; padding: 13px 26px; border-radius: 10px;
+    transition: transform .25s var(--ease), box-shadow .25s, background .25s, border-color .25s;
+    cursor: pointer; border: 1px solid transparent; font-family: var(--sans);
+  }
+  .btn-primary { background: var(--brand-deep); color: #fff; box-shadow: 0 0 0 0 rgba(226, 87, 31, 0.4); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px -8px rgba(226, 87, 31, 0.55); }
+  .btn-ghost { border-color: var(--line); color: var(--ink-2); background: transparent; }
+  .btn-ghost:hover { border-color: var(--brand); color: var(--ink); transform: translateY(-2px); }
+  .btn .arr { transition: transform .25s var(--ease); }
+  .btn:hover .arr { transform: translateX(4px); }
+  .btn:hover .arr.down { transform: translateY(4px); }
+
+  .svc-index { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .svc-index .leader { flex: 1; min-width: 24px; border-top: 1px dashed rgba(255, 122, 77, 0.25); }
+  .svc-index a {
+    display: inline-flex; align-items: baseline; gap: 8px;
+    font-size: 14.5px; color: var(--ink-2); transition: color .25s;
+  }
+  .svc-index a:hover { color: var(--ink); }
+  .svc-index a b { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--brand); }
+
+  /* ——— sections ——— */
+  section { padding: 96px 0; position: relative; }
+  .sec-head { margin-bottom: 52px; }
+  .sec-head h2 { font-size: clamp(30px, 4.4vw, 44px); font-weight: 900; letter-spacing: -0.03em; margin-top: 18px; }
+  .sec-head h2 .dim { color: var(--muted); font-weight: 400; }
+  .sec-head p { color: var(--muted); max-width: 46em; margin-top: 12px; }
+
+  /* ——— services ——— */
+  #services { border-top: 1px solid var(--line-soft); }
+  .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 860px) { .svc-grid { grid-template-columns: 1fr; } }
+  .svc {
+    position: relative; overflow: hidden;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 18px; padding: 34px 32px 30px;
+    transition: transform .35s var(--ease), border-color .35s, background .35s;
+  }
+  .svc:hover { transform: translateY(-4px); border-color: rgba(255, 122, 77, 0.45); background: #181C24; }
+  .svc::after {
+    content: attr(data-num); position: absolute; right: 18px; top: 6px;
+    font-family: var(--mono); font-weight: 700; font-size: clamp(72px, 8vw, 104px); line-height: 1;
+    color: transparent; -webkit-text-stroke: 1px rgba(242, 239, 233, 0.16);
+    transition: -webkit-text-stroke-color .35s; pointer-events: none;
+  }
+  .svc:hover::after { -webkit-text-stroke-color: rgba(255, 122, 77, 0.38); }
+  .svc-icon {
+    width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+    background: var(--brand-dim); border: 1px solid rgba(255, 122, 77, 0.22); margin-bottom: 22px;
+  }
+  .svc-icon svg { stroke: var(--brand); }
+  .svc h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .svc h3 .en { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .svc .sub { color: var(--brand); font-size: 15px; margin: 8px 0 14px; font-weight: 500; }
+  .svc .body { color: var(--ink-2); font-size: 15px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; list-style: none; }
+  .chips li {
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+    border: 1px solid var(--line); padding: 4px 11px; border-radius: 999px;
+    transition: color .25s, border-color .25s;
+  }
+  .svc:hover .chips li { border-color: rgba(255, 122, 77, 0.3); color: var(--ink-2); }
+
+  /* ——— process: the trace line ——— */
+  #process { border-top: 1px solid var(--line-soft); }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; position: relative; list-style: none; }
+  .steps::before {
+    content: ""; position: absolute; top: 5px; left: 0; right: 0;
+    border-top: 1px dashed rgba(255, 122, 77, 0.35);
+  }
+  @media (max-width: 860px) {
+    .steps { grid-template-columns: 1fr; gap: 30px; }
+    .steps::before { top: 0; bottom: 0; left: 5px; right: auto; border-top: none; border-left: 1px dashed rgba(255, 122, 77, 0.35); }
+    .steps li { padding-left: 32px; }
+  }
+  .steps li { position: relative; }
+  .steps li::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 11px; height: 11px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--brand); transform: translateY(-6px);
+  }
+  @media (max-width: 860px) { .steps li::before { transform: none; } }
+  .steps .n { font-family: var(--mono); font-size: 12px; color: var(--brand); letter-spacing: 0.1em; display: block; margin: 10px 0 6px; }
+  .steps h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .steps p { color: var(--muted); font-size: 14px; }
+
+  /* ——— brand board ——— */
+  #board { border-top: 1px solid var(--line-soft); }
+  .board-frame {
+    border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+    background: var(--bg-2); position: relative;
+  }
+  .board-frame::before {
+    content: ""; position: absolute; inset: 0; border-radius: 20px; z-index: 2; pointer-events: none;
+    box-shadow: inset 0 1px 0 rgba(242, 239, 233, 0.06), inset 0 0 80px rgba(0, 0, 0, 0.35);
+  }
+  .board-frame img { width: 100%; transition: transform 1.2s var(--ease); }
+  .board-frame:hover img { transform: scale(1.015); }
+  .board-meta {
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    padding: 18px 6px 0; color: var(--muted); font-family: var(--mono); font-size: 12px;
+  }
+  .swatches { display: flex; gap: 6px; margin-left: auto; }
+  .swatches i { width: 16px; height: 16px; border-radius: 4px; border: 1px solid rgba(242, 239, 233, 0.12); }
+
+  /* ——— contact ——— */
+  #contact {
+    border-top: 1px solid var(--line-soft); text-align: center;
+    padding: 130px 0 120px; position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: ""; position: absolute; left: 50%; bottom: -45%; transform: translateX(-50%);
+    width: 90vw; height: 70vw; max-width: 1100px; max-height: 700px;
+    background: radial-gradient(circle, rgba(226, 87, 31, 0.13), transparent 60%);
+    pointer-events: none;
+  }
+  #contact .kicker { justify-content: center; }
+  #contact .kicker::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; }
+  #contact h2 { font-size: clamp(30px, 5vw, 52px); font-weight: 900; letter-spacing: -0.03em; margin: 22px 0 14px; }
+  #contact .hint { color: var(--muted); max-width: 36em; margin: 0 auto 44px; }
+  .big-mail {
+    display: inline-block; font-family: var(--mono); font-weight: 700;
+    font-size: clamp(21px, 5.4vw, 62px); letter-spacing: -0.02em; line-height: 1.25;
+    color: var(--ink); position: relative; z-index: 2;
+    text-shadow: 0 0 44px rgba(255, 122, 77, 0.35);
+    background-image: linear-gradient(var(--brand), var(--brand));
+    background-repeat: no-repeat; background-size: 100% 2px; background-position: 0 100%;
+    padding-bottom: 8px; transition: color .3s;
+    word-break: break-all;
+  }
+  .big-mail:hover { color: var(--brand); }
+  #contact .btn-row { justify-content: center; margin: 46px 0 0; }
+  #contact .note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 34px; }
+  #contact .note b { color: var(--brand); font-weight: 500; }
+
+  /* ——— footer ——— */
+  footer { border-top: 1px solid var(--line-soft); padding: 30px 0; }
+  .foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; color: var(--muted); font-size: 13px; }
+  .foot .lockup { font-size: 14px; }
+  .foot .sep { flex: 1; }
+  .foot .deploy { font-family: var(--mono); font-size: 11.5px; }
+  .foot .deploy b { color: var(--ink-2); font-weight: 400; }
+
+  /* ——— motion ——— */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0s); }
+  .reveal.in { opacity: 1; transform: none; }
+  .rise { opacity: 0; animation: rise .9s var(--ease) forwards; animation-delay: var(--d, 0s); }
+  @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .rise { animation: none; opacity: 1; }
+    .hero-ghost { animation: none; }
+    .board-frame img, .btn, .svc { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="trace-top" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="lockup" href="#top" aria-label="foxai 首页">
+      <svg width="24" height="24" viewBox="0 0 64 64" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 55V22c0-7.2 5.8-13 13-13h2"/>
+          <path d="M12.5 31h21"/>
+        </g>
+        <circle cx="49" cy="9" r="5.5" fill="currentColor"/>
+      </svg>
+      fox<span class="ai">ai</span>
+    </a>
+    <div class="nav-links">
+      <a href="#services">业务</a>
+      <a href="#process">流程</a>
+      <a href="#board">品牌</a>
+      <a href="#contact">联系</a>
+    </div>
+    <a class="nav-cta" href="mailto:foxbobby@qq.com">foxbobby@qq.com</a>
+  </div>
+</nav>
+
+<!-- ——— hero ——— -->
+<header class="hero" id="top">
+  <svg class="hero-ghost" viewBox="0 0 64 64" aria-hidden="true">
+    <g fill="none" stroke="rgba(255,122,77,0.09)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 55V22c0-7.2 5.8-13 13-13h2"/>
+      <path d="M12.5 31h21"/>
+    </g>
+    <circle cx="49" cy="9" r="5.5" fill="rgba(255,122,77,0.09)"/>
+  </svg>
+  <div class="wrap hero-in">
+    <p class="kicker rise" style="--d:.05s">foxai · 个人工作站 <span class="lead-line" aria-hidden="true"></span></p>
+    <h1 class="rise" style="--d:.15s">
+      <svg width="0.62em" height="0.62em" viewBox="0 0 64 64" aria-hidden="true" style="margin-right:0.06em">
+        <g fill="none" stroke="#FF7A4D" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 55V22c0-7.2 5.8-13 13-13h2"/>
+          <path d="M12.5 31h21"/>
+        </g>
+        <circle cx="49" cy="9" r="5.5" fill="#FF7A4D"/>
+      </svg>
+      fox<span class="ai">ai</span>
+    </h1>
+    <p class="role rise" style="--d:.25s"><b>创造者 · 全栈交付</b> —— CREATOR / FULL-STACK DELIVERY</p>
+    <p class="lead rise" style="--d:.32s">
+      你好,我是 foxai。我把<em>软件开发、视频制作、项目设计、创意输出</em>装进同一个工作台:
+      一个窗口对接,从一个想法到最终成品,全程闭环交付。
+    </p>
+    <div class="btn-row rise" style="--d:.4s">
+      <a class="btn btn-primary" href="mailto:foxbobby@qq.com">开始一次合作 <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="#services">看看业务 <span class="arr down">↓</span></a>
+    </div>
+    <div class="svc-index rise" style="--d:.5s">
+      <a href="#svc-dev"><b>01</b> 软件开发</a><span class="leader"></span>
+      <a href="#svc-video"><b>02</b> 视频制作</a><span class="leader"></span>
+      <a href="#svc-design"><b>03</b> 项目设计</a><span class="leader"></span>
+      <a href="#svc-creative"><b>04</b> 创意输出</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ——— services ——— -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="kicker">四条业务线 <span class="lead-line" aria-hidden="true"></span></p>
+        <h2>一个工作台,<br /><span class="dim">四种交付能力。</span></h2>
+        <p>每条业务线都可以单独承接,也可以组合成从构思到上线的完整交付链。</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc reveal" id="svc-dev" data-num="01">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="M13.5 4 10.5 20"/>
+            </svg>
+          </div>
+          <h3>软件开发 <span class="en">Software Development</span></h3>
+          <p class="sub">构建高效、稳定、可扩展的数字产品</p>
+          <p class="body">
+            从需求梳理、架构设计到部署上线的全流程交付。专注 Web 应用、API 服务、自动化工具与
+            AI 应用集成,以工程化思维管理代码质量与迭代节奏——让产品不仅跑得快,更跑得稳。
+            无论从零构建新系统,还是接管并重构既有项目,都以可维护、可扩展为第一原则。
+          </p>
+          <ul class="chips">
+            <li>全栈 Web 应用</li><li>API 服务</li><li>自动化工具</li><li>AI 应用集成</li>
+          </ul>
+        </article>
+
+        <article class="svc reveal" id="svc-video" data-num="02" style="--d:.08s">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="8" width="18" height="12" rx="2"/><path d="m3 8 2-4.5h14L21 8"/><path d="M8 3.5 7 8m5-4.5L11 8m5-4.5L15 8"/>
+            </svg>
+          </div>
+          <h3>视频制作 <span class="en">Video Production</span></h3>
+          <p class="sub">以影像叙事,传递价值与情感</p>
+          <p class="body">
+            覆盖脚本策划、拍摄执行、剪辑调色、动效包装的完整制作链路。产品演示、品牌宣传片、
+            知识科普、短视频内容均可承接;擅长把复杂的信息翻译成流畅的镜头语言,
+            让内容被看见,更被记住。
+          </p>
+          <ul class="chips">
+            <li>脚本策划</li><li>剪辑调色</li><li>动效包装</li><li>短视频内容</li>
+          </ul>
+        </article>
+
+        <article class="svc reveal" id="svc-design" data-num="03">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9.5 9v11"/>
+            </svg>
+          </div>
+          <h3>项目设计 <span class="en">Project Design</span></h3>
+          <p class="sub">从想法到原型,设计驱动的解决方案</p>
+          <p class="body">
+            面向 0 到 1 的项目孵化:需求定义、流程梳理、原型设计与落地方案。把模糊的想法拆解为
+            可执行的路径图,在用户体验与商业目标之间找到平衡点,让每一步决策都有依据、可验证。
+          </p>
+          <ul class="chips">
+            <li>需求定义</li><li>流程梳理</li><li>原型设计</li><li>落地方案</li>
+          </ul>
+        </article>
+
+        <article class="svc reveal" id="svc-creative" data-num="04" style="--d:.08s">
+          <div class="svc-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.9 10.6c.6.5.9 1.2.9 2V16h6v-.4c0-.8.3-1.5.9-2A6 6 0 0 0 12 3Z"/>
+            </svg>
+          </div>
+          <h3>创意输出 <span class="en">Creative Output</span></h3>
+          <p class="sub">记录灵感,产出有温度的内容</p>
+          <p class="body">
+            文案撰写、视觉设计、品牌物料与内容运营的持续输出。相信创意不是等来的灵感,
+            而是练出来的手感——把专业经验沉淀为可传播的内容资产,让个人品牌与业务一起生长。
+          </p>
+          <ul class="chips">
+            <li>文案撰写</li><li>视觉设计</li><li>品牌物料</li><li>内容运营</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— process ——— -->
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="kicker">工作方式 <span class="lead-line" aria-hidden="true"></span></p>
+        <h2>像一次请求,<br /><span class="dim">从发出到抵达。</span></h2>
+      </div>
+      <ol class="steps">
+        <li class="reveal">
+          <span class="n">STEP 01</span><h3>需求沟通</h3>
+          <p>听清目标与约束,明确「做什么、不做什么」,给出诚实的可行性判断。</p>
+        </li>
+        <li class="reveal" style="--d:.08s">
+          <span class="n">STEP 02</span><h3>方案设计</h3>
+          <p>输出结构化方案与原型,范围、周期、交付物逐项确认后再动手。</p>
+        </li>
+        <li class="reveal" style="--d:.16s">
+          <span class="n">STEP 03</span><h3>制作执行</h3>
+          <p>小步快跑,阶段成果随时可见,方向偏差在过程中即时修正。</p>
+        </li>
+        <li class="reveal" style="--d:.24s">
+          <span class="n">STEP 04</span><h3>交付迭代</h3>
+          <p>交付只是起点,根据真实反馈持续打磨,直到效果立得住。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ——— brand board ——— -->
+  <section id="board">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="kicker">视觉与品牌 <span class="lead-line" aria-hidden="true"></span></p>
+        <h2>设计语言,<span class="dim">先立后行。</span></h2>
+        <p>统一的视觉规范贯穿每一次交付——从页面、视频到物料,都出自同一套色彩与版式系统。</p>
+      </div>
+      <figure class="reveal">
+        <div class="board-frame">
+          <img src="assets/brand-board.jpg" alt="foxai 品牌总览图:四大业务、视觉规范与应用场景" width="1600" height="900" loading="lazy" />
+        </div>
+        <figcaption class="board-meta">
+          <span>BRAND BOARD · foxai</span>
+          <span>创造者 · 全栈交付</span>
+          <span class="swatches" aria-hidden="true">
+            <i style="background:#0F1115"></i><i style="background:#1C1F26"></i><i style="background:#2A2F3A"></i><i style="background:#FFB84D"></i><i style="background:#FFE9C2"></i>
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ——— contact ——— -->
+  <section id="contact">
+    <div class="wrap">
+      <p class="kicker reveal">联系方式 <span class="lead-line" style="max-width:120px" aria-hidden="true"></span></p>
+      <h2 class="reveal" style="--d:.08s">有想法?我们聊聊。</h2>
+      <p class="hint reveal" style="--d:.14s">
+        一个待开发的产品、一支想拍的片子、一个刚萌芽的点子——都欢迎。
+        写封邮件说清你的想法,通常 24 小时内回复。
+      </p>
+      <div class="reveal" style="--d:.2s">
+        <a class="big-mail" href="mailto:foxbobby@qq.com">foxbobby@qq.com</a>
+      </div>
+      <div class="btn-row reveal" style="--d:.28s">
+        <a class="btn btn-primary" href="mailto:foxbobby@qq.com">✉&nbsp; 写邮件给我</a>
+        <button class="btn btn-ghost" id="copyBtn" type="button">⧉&nbsp; <span>复制邮箱</span></button>
+      </div>
+      <p class="note reveal" style="--d:.34s">合作咨询 · 案例索取 · 只是打个招呼,都可以 → <b>foxbobby@qq.com</b></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="lockup" href="#top" aria-label="foxai">
+      <svg width="18" height="18" viewBox="0 0 64 64" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 55V22c0-7.2 5.8-13 13-13h2"/>
+          <path d="M12.5 31h21"/>
+        </g>
+        <circle cx="49" cy="9" r="5.5" fill="currentColor"/>
+      </svg>
+      fox<span class="ai">ai</span>
+    </a>
+    <span>创造者 · 全栈交付</span>
+    <span class="sep"></span>
+    <span class="deploy">© <span id="year">2026</span> foxai · deployed on <b>Cloudflare Pages</b></span>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }),
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // copy email
+  const btn = document.getElementById('copyBtn');
+  const EMAIL = 'foxbobby@qq.com';
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+    } catch (err) {
+      const ta = document.createElement('textarea');
+      ta.value = EMAIL;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    const label = btn.querySelector('span');
+    label.textContent = '已复制 ✓';
+    btn.style.borderColor = 'rgba(255,122,77,0.6)';
+    btn.style.color = '#FF7A4D';
+    setTimeout(() => {
+      label.textContent = '复制邮箱';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 1800);
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
