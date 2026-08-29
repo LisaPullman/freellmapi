@@ -274,7 +274,7 @@ export function CommandPalette() {
                       onMouseEnter={() => setActive(index)}
                       onClick={() => runCommand(cmd)}
                       className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors ${
-                        isActive ? 'bg-muted text-foreground' : 'text-muted-foreground'
+                        isActive ? 'bg-[var(--brand-muted)] text-foreground' : 'text-muted-foreground'
                       }`}
                     >
                       <Icon className="size-4 shrink-0" />

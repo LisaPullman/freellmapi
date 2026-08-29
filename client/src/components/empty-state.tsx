@@ -19,7 +19,17 @@ export function EmptyState({
 }) {
   return (
     <div className={cn('rounded-3xl border border-dashed p-8 text-center', className)}>
-      {Icon && <Icon className="mx-auto mb-3 size-6 text-muted-foreground/60" />}
+      {Icon && (
+        // Soft brand halo around the icon: 12%-tinted Ember disc with a solid
+        // Ember glyph. Subtle enough to read as "guided by the brand", not
+        // enough to compete with the page's primary action.
+        <div
+          aria-hidden="true"
+          className="mx-auto mb-4 flex size-10 items-center justify-center rounded-full bg-[var(--brand-muted)] text-brand"
+        >
+          <Icon className="size-5" />
+        </div>
+      )}
       <p className="text-sm font-medium">{title}</p>
       {description && <div className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">{description}</div>}
       {action && <div className="mt-4 flex flex-wrap items-center justify-center gap-2">{action}</div>}

@@ -20,7 +20,7 @@ import type { SVGProps } from 'react'
 const MARK_PATHS = (
   <g
     fill="none"
-    stroke="currentColor"
+    stroke="var(--brand)"
     strokeWidth="7.5"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -35,7 +35,7 @@ const MARK_PATHS = (
     {/* The endpoint — solid, smaller, deliberately separated from the bar.
         This is the only filled element; everything else stays as line so
         the mark scales down as outline, not as blob. */}
-    <circle cx="49" cy="9" r="5.5" fill="currentColor" stroke="none" />
+    <circle cx="49" cy="9" r="5.5" fill="var(--brand)" stroke="none" />
   </g>
 )
 

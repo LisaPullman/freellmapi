@@ -317,7 +317,7 @@ function Navbar() {
                     return menu ? (
                       <DropdownMenuSub key={item.to}>
                         <DropdownMenuSubTrigger
-                          className={menu.isActive(location.pathname) ? 'bg-accent text-accent-foreground font-medium' : undefined}
+                          className={menu.isActive(location.pathname) ? 'bg-[var(--brand-muted)] text-foreground font-medium' : undefined}
                         >
                           {t(item.labelKey)}
                         </DropdownMenuSubTrigger>
@@ -333,7 +333,7 @@ function Navbar() {
                       <DropdownMenuItem
                         key={item.to}
                         onClick={() => navigate(item.to)}
-                        className={location.pathname === item.to ? 'bg-accent text-accent-foreground font-medium' : undefined}
+                        className={location.pathname === item.to ? 'bg-[var(--brand-muted)] text-foreground font-medium' : undefined}
                       >
                         {t(item.labelKey)}
                       </DropdownMenuItem>

@@ -163,7 +163,9 @@ function Step({
     <li className="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl px-2 py-2.5 sm:flex-nowrap">
       <span
         className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-medium tabular-nums ${
-          done ? 'bg-emerald-600 text-white dark:bg-emerald-500' : 'border text-muted-foreground'
+          // Done steps wear the brand: solid Ember disc + brand-foreground
+          // glyph. Same trick the favicon uses, scaled down to a list bullet.
+          done ? 'bg-brand text-brand-foreground' : 'border text-muted-foreground'
         }`}
       >
         {done ? <Check className="size-3" /> : index}
