@@ -30,7 +30,9 @@
       "Bash(python3 -m http.server 4173)",
       "Bash(md5 *)",
       "Bash(command -v uv)",
-      "Read(//Users/foxai/**)"
+      "Read(//Users/foxai/**)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
