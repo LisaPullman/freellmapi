@@ -196,6 +196,25 @@
   .svc-index a:hover { color: var(--ink); }
   .svc-index a b { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--brand); }
 
+  /* mobile: grid 三列(标签|虚线|标签) 显式对位,保留首行/次行的虚线,
+     把跨行那条(leader2)隐藏,避免它撑开把 02 推入、04 贴边造成错位 */
+  @media (max-width: 760px) {
+    .svc-index {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      column-gap: 10px;
+      row-gap: 18px;
+      align-items: center;
+    }
+    .svc-index > a:nth-child(1) { grid-column: 1; }      /* 01 */
+    .svc-index > .leader:nth-of-type(1) { grid-column: 2; } /* 01—02 虚线 */
+    .svc-index > a:nth-child(3) { grid-column: 3; }      /* 02 */
+    .svc-index > .leader:nth-of-type(2) { display: none; } /* 跨行那条,藏掉 */
+    .svc-index > a:nth-child(5) { grid-column: 1; }      /* 03 */
+    .svc-index > .leader:nth-of-type(3) { grid-column: 2; } /* 03—04 虚线 */
+    .svc-index > a:nth-child(7) { grid-column: 3; }      /* 04 */
+  }
+
   /* ——— sections ——— */
   section { padding: 96px 0; position: relative; }
   @media (max-width: 760px) { section { padding: 72px 0; } }
