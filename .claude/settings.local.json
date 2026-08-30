@@ -26,7 +26,11 @@
       "Bash(sips *)",
       "Bash(python3 -m http.server 8799)",
       "Bash(pkill -f \"chrome-devtools-mcp/chrome-profile\")",
-      "Bash(/usr/bin/python3 *)"
+      "Bash(/usr/bin/python3 *)",
+      "Bash(python3 -m http.server 4173)",
+      "Bash(md5 *)",
+      "Bash(command -v uv)",
+      "Read(//Users/foxai/**)"
     ]
   }
 }
