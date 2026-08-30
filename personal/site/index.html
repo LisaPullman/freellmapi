@@ -9,7 +9,7 @@
 <meta property="og:title" content="foxai · 创造者,全栈交付" />
 <meta property="og:description" content="软件开发 / 视频制作 / 项目设计 / 创意输出 —— 一站式数字创作解决方案" />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="assets/brand-board.jpg" />
+<meta property="og:image" content="assets/board-landscape.png" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -75,7 +75,7 @@
     -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line-soft);
   }
-  .nav-in { display: flex; align-items: center; gap: 28px; height: 64px; }
+  .nav-in { display: flex; align-items: center; gap: 14px; height: 64px; }
   .lockup { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; line-height: 1; }
   .lockup .ai { color: var(--brand); }
   .nav-links { display: flex; gap: 24px; margin-left: auto; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
@@ -97,6 +97,8 @@
 
   /* ——— hero ——— */
   .hero { position: relative; min-height: 94vh; display: flex; align-items: center; padding: 140px 0 90px; overflow: hidden; }
+  @media (max-width: 760px) { .hero { padding: 120px 0 70px; min-height: auto; } }
+  @media (max-width: 480px) { .hero { padding: 104px 0 56px; } }
   .hero::before {
     content: ""; position: absolute; inset: 0;
     background-image: radial-gradient(rgba(242, 239, 233, 0.055) 1px, transparent 1px);
@@ -110,12 +112,44 @@
     pointer-events: none;
   }
   .hero-ghost {
-    position: absolute; right: -4%; top: 10%; width: clamp(300px, 42vw, 560px); height: auto;
+    position: absolute; right: 2%; top: 10%; width: clamp(180px, 32vw, 520px); height: auto;
     opacity: 1; pointer-events: none;
     animation: drift 9s ease-in-out infinite alternate;
   }
   @keyframes drift { from { transform: translateY(0); } to { transform: translateY(16px); } }
-  .hero-in { position: relative; z-index: 2; width: 100%; }
+  @media (max-width: 760px) {
+    /* Ghost SVG lives behind the copy on desktop; on small screens tuck it
+       top-right so it never bleeds past the viewport edge. */
+    .hero-ghost { right: -8%; top: 4%; width: clamp(160px, 52vw, 260px); opacity: .55; }
+  }
+  @media (max-width: 520px) {
+    /* Below 520, the SVG's natural size still pokes past the right edge —
+       clip it to viewport and let the top crop into the page padding. */
+    .hero-ghost { display: none; }
+  }
+  .hero-in {
+    position: relative; z-index: 2; width: 100%;
+    display: grid; grid-template-columns: minmax(0, 1fr) clamp(250px, 24vw, 330px);
+    gap: clamp(28px, 5vw, 64px); align-items: center;
+  }
+  /* ——— hero 证件卡(LOGO 右侧,直接展示) ——— */
+  .hero-card { justify-self: end; width: 100%; }
+  .hero-card img {
+    width: 100%; height: auto; border-radius: 18px; display: block;
+    border: 1px solid rgba(255, 122, 77, 0.28);
+    box-shadow: 0 30px 70px -24px rgba(0, 0, 0, 0.85), 0 0 60px -28px rgba(255, 122, 77, 0.55);
+    transition: transform .45s var(--ease), border-color .45s;
+  }
+  .hero-card:hover img { transform: translateY(-5px); border-color: rgba(255, 122, 77, 0.55); }
+  .hero-card figcaption {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted);
+    text-align: center; margin-top: 14px;
+  }
+  @media (max-width: 900px) {
+    .hero-in { grid-template-columns: 1fr; gap: 34px; }
+    .hero-card { justify-self: start; max-width: 320px; order: 2; }
+    .hero-card figcaption { text-align: left; }
+  }
   .kicker {
     display: flex; align-items: center; gap: 12px;
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
@@ -164,6 +198,8 @@
 
   /* ——— sections ——— */
   section { padding: 96px 0; position: relative; }
+  @media (max-width: 760px) { section { padding: 72px 0; } }
+  @media (max-width: 480px) { section { padding: 56px 0; } }
   .sec-head { margin-bottom: 52px; }
   .sec-head h2 { font-size: clamp(30px, 4.4vw, 44px); font-weight: 900; letter-spacing: -0.03em; margin-top: 18px; }
   .sec-head h2 .dim { color: var(--muted); font-weight: 400; }
@@ -250,6 +286,8 @@
     border-top: 1px solid var(--line-soft); text-align: center;
     padding: 130px 0 120px; position: relative; overflow: hidden;
   }
+  @media (max-width: 760px) { #contact { padding: 96px 0 90px; } }
+  @media (max-width: 480px) { #contact { padding: 72px 0 72px; } }
   #contact::before {
     content: ""; position: absolute; left: 50%; bottom: -45%; transform: translateX(-50%);
     width: 90vw; height: 70vw; max-width: 1100px; max-height: 700px;
@@ -334,6 +372,7 @@
     <circle cx="49" cy="9" r="5.5" fill="rgba(255,122,77,0.09)"/>
   </svg>
   <div class="wrap hero-in">
+    <div class="hero-copy">
     <p class="kicker rise" style="--d:.05s">foxai · 个人工作站 <span class="lead-line" aria-hidden="true"></span></p>
     <h1 class="rise" style="--d:.15s">
       <svg width="0.62em" height="0.62em" viewBox="0 0 64 64" aria-hidden="true" style="margin-right:0.06em">
@@ -360,6 +399,11 @@
       <a href="#svc-design"><b>03</b> 项目设计</a><span class="leader"></span>
       <a href="#svc-creative"><b>04</b> 创意输出</a>
     </div>
+    </div>
+    <figure class="hero-card rise" style="--d:.35s">
+      <img src="assets/id-card.png" alt="foxai 证件卡:GEEK ID 2049 · DEV_EXPLORER · Software Engineer · Systems / AI / Cloud" width="1254" height="1254" fetchpriority="high" />
+      <figcaption>GEEK ID 2049 · DEV_EXPLORER</figcaption>
+    </figure>
   </div>
 </header>
 
@@ -484,7 +528,10 @@
       </div>
       <figure class="reveal">
         <div class="board-frame">
-          <img src="assets/brand-board.jpg" alt="foxai 品牌总览图:四大业务、视觉规范与应用场景" width="1600" height="900" loading="lazy" />
+          <picture>
+            <source media="(max-width: 720px)" srcset="assets/board-portrait.png" width="941" height="1672" />
+            <img src="assets/board-landscape.png" alt="foxai 品牌总览图:四大业务、视觉规范与应用场景" width="1672" height="941" />
+          </picture>
         </div>
         <figcaption class="board-meta">
           <span>BRAND BOARD · foxai</span>
