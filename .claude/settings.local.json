@@ -32,7 +32,11 @@
       "Bash(command -v uv)",
       "Read(//Users/foxai/**)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -s -o /dev/null -w \"server:%{http_code}\\\\n\" http://localhost:3001/healthz)",
+      "Bash(curl -s -o /dev/null -w \"client:%{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(curl *)",
+      "Bash(sqlite3 *)"
     ]
   }
 }
